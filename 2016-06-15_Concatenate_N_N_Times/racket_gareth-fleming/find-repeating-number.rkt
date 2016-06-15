@@ -8,8 +8,7 @@
     [(str strlen n)
      (if (> n (/ strlen 2))
 	 'no-repeat
-	 (let ([num (substring str 0 n)]
-	       [repeats (quotient strlen n)])
-	   (match (string-append* (make-list repeats num))
-	     [(== str) (list (string->number num) repeats)]
+	 (let ([num (string->number (substring str 0 n))])
+	   (match (string-append* (make-list num (~a num)))
+	     [(== str) num]
 	     [_ (find-repeating-number str strlen (+ 1 n))])))]))
